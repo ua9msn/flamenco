@@ -1,0 +1,47 @@
+
+.bit {
+  color: inherit;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+}
+
+.bitIndicator {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.15s ease;
+
+}
+.regular {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(251, 191, 36, 0.5);
+  border: 2px solid rgba(120, 53, 15, 0.3);
+}
+
+.accent {
+  background: rgba(217, 119, 6, 0.4);
+  color: #fcd34d;
+  border: 2px solid rgba(180, 83, 9, 0.6);
+}
+
+.currentRegular {
+  background: #fb923c;
+  color: white;
+  border: 2px solid #fdba74;
+  box-shadow: 0 10px 15px -3px rgba(251, 146, 60, 0.5);
+}
+
+.currentAccent {
+  background: #f59e0b;
+  color: white;
+  border: 2px solid #fcd34d;
+  box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.5);
+}
