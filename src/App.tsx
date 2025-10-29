@@ -50,6 +50,10 @@ export default function App() {
   const lookahead = 25.0; // ms
   const scheduleAheadTime = 0.1; // sec
 
+    useEffect(() => {
+        audioManager.loadSamples();
+    }, []);
+
   useEffect(() => {
     audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
     return () => {
@@ -86,7 +90,7 @@ export default function App() {
   const nextNote = () => {
     const secondsPerBeat = 60.0 / bpm;
     nextNoteTimeRef.current += secondsPerBeat;
-    currentBeatRef.current = (currentBeatRef.current % (selectedPattern.beats)) + 1;
+    currentBeatRef.current = (currentBeatRef.current % selectedPattern.beats) + 1;
   };
 
   const scheduleNote = (beatNumber: number, time: number) => {
@@ -98,10 +102,14 @@ export default function App() {
   const scheduler = () => {
     if (!audioContextRef.current) return;
     
-    while (nextNoteTimeRef.current < audioContextRef.current.currentTime + scheduleAheadTime) {
+    while (nextNoteTimeRef.current < (audioContextRef.current.currentTime + scheduleAheadTime)) {
+        console.log('in while', nextNoteTimeRef.current, audioContextRef.current.currentTime)
       scheduleNote(currentBeatRef.current, nextNoteTimeRef.current);
       nextNote();
     }
+
+    console.log('in scheduler', nextNoteTimeRef.current,  audioContextRef.current.currentTime)
+
     timerIdRef.current = window.setTimeout(scheduler, lookahead);
   };
 
@@ -111,11 +119,13 @@ export default function App() {
     setIsPlaying(true);
     currentBeatRef.current = 0;
     nextNoteTimeRef.current = audioContextRef.current.currentTime;
+    audioContextRef.current.resume();
     scheduler();
   };
 
   const stopMetronome = () => {
     setIsPlaying(false);
+    audioContextRef.current?.suspend();
     if (timerIdRef.current) {
       clearTimeout(timerIdRef.current);
       timerIdRef.current = null;
@@ -301,7 +311,7 @@ export default function App() {
 
         {/* Info */}
         <div className="metronome-info">
-          {selectedPattern.beats} beats • Accents on {bitInfo.join(', ')}
+          {selectedPattern.beats} beats • Accents on {selectedPattern.accents.join(', ')}
         </div>
       </div>
     </div>

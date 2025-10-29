@@ -5,9 +5,6 @@ interface AudioSample {
 
 interface AudioSamples {
   palo: AudioSample;
-  jaleo: AudioSample;
-  castanets: AudioSample;
-  cajon: AudioSample;
 }
 
 class AudioManager {
@@ -21,21 +18,9 @@ class AudioManager {
       // Create audio elements for each sound type
       this.samples = {
         palo: {
-          accent: this.createAudio('/sounds/palo-accent.wav'),
-          regular: this.createAudio('/sounds/palo-regular.wav'),
-        },
-        jaleo: {
-          accent: this.createAudio('/sounds/jaleo-accent.wav'),
-          regular: this.createAudio('/sounds/jaleo-regular.wav'),
-        },
-        castanets: {
-          accent: this.createAudio('/sounds/castanets-accent.wav'),
-          regular: this.createAudio('/sounds/castanets-regular.wav'),
-        },
-        cajon: {
-          accent: this.createAudio('/sounds/cajon-accent.wav'),
-          regular: this.createAudio('/sounds/cajon-regular.wav'),
-        },
+          accent: this.createAudio('/sounds/capital-clap-alone_D_minor.wav'),
+          regular: this.createAudio('/sounds/clap-basic_C_minor.wav'),
+        }
       };
 
       this.isLoaded = true;
