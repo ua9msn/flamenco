@@ -43,9 +43,11 @@ class AudioManager {
     const audio = isAccent ? sample.accent : sample.regular;
 
     // Clone and play to allow overlapping sounds
-    const clone = audio.cloneNode(true) as HTMLAudioElement;
-    clone.volume = audio.volume;
-    clone.play().catch(err => console.error('Error playing sound:', err));
+    // const clone = audio.cloneNode(true) as HTMLAudioElement;
+    // clone.volume = audio.volume;
+    // clone.play().catch(err => console.error('Error playing sound:', err));
+
+      audio.play().catch(err => console.error('Error playing sound:', err));
   }
 
   setVolume(soundType: 'palo' | 'jaleo' | 'castanets' | 'cajon', volume: number): void {
