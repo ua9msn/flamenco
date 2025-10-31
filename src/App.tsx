@@ -4,13 +4,10 @@ import { CustomCheckbox } from './components/CustomCheckbox';
 import { audioManager } from './utils/audioManager';
 import './styles/metronome.css';
 import { Header, BitVisualizer } from "./components";
+import { FlamencoPattern } from "./types";
+import { StyleSelector } from "./components/StyleSelector/StyleSelector";
 
-interface FlamencoPattern {
-  name: string;
-  beats: number;
-  accents: number[];
-  subdivision: number;
-}
+
 
 const flamencoPatterns: FlamencoPattern[] = [
   { name: 'Soleá', beats: 12, accents: [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0], subdivision: 2 },
@@ -33,8 +30,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [bpm, setBpm] = useState(120);
   const [currentBeat, setCurrentBeat] = useState(0);
-  const [selectedPattern, setSelectedPattern] = useState(flamencoPatterns[0]);
-  const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [selectedPatternIndex, setSelectedPattern] = useState(0);
   const [soundTypes, setSoundTypes] = useState<SoundTypes>({
     palo: true,
     jaleo: false,
@@ -49,6 +45,8 @@ export default function App() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const lookahead = 25.0; // ms
   const scheduleAheadTime = 0.1; // sec
+
+    const selectedPattern = flamencoPatterns[selectedPatternIndex];
 
     useEffect(() => {
         audioManager.loadSamples();
@@ -90,12 +88,13 @@ export default function App() {
   const nextNote = () => {
     const secondsPerBeat = 60.0 / bpm;
     nextNoteTimeRef.current += secondsPerBeat;
-    currentBeatRef.current = (currentBeatRef.current % selectedPattern.beats) + 1;
+    currentBeatRef.current = ((1 + currentBeatRef.current) % selectedPattern.beats) ;
   };
 
   const scheduleNote = (beatNumber: number, time: number) => {
-    const isAccent = selectedPattern.accents.includes(beatNumber);
-    playClick(time, isAccent);
+    const isAccent = !!selectedPattern.accents[beatNumber];
+      console.log(beatNumber, isAccent);
+      playClick(time, isAccent);
     setCurrentBeat(beatNumber);
   };
 
@@ -103,12 +102,9 @@ export default function App() {
     if (!audioContextRef.current) return;
     
     while (nextNoteTimeRef.current < (audioContextRef.current.currentTime + scheduleAheadTime)) {
-        console.log('in while', nextNoteTimeRef.current, audioContextRef.current.currentTime)
       scheduleNote(currentBeatRef.current, nextNoteTimeRef.current);
       nextNote();
     }
-
-    console.log('in scheduler', nextNoteTimeRef.current,  audioContextRef.current.currentTime)
 
     timerIdRef.current = window.setTimeout(scheduler, lookahead);
   };
@@ -141,13 +137,6 @@ export default function App() {
       startMetronome();
     }
   };
-
-  useEffect(() => {
-    if (isPlaying) {
-      stopMetronome();
-      setTimeout(() => startMetronome(), 50);
-    }
-  }, [bpm, selectedPattern]);
 
   const handleSliderChange = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return;
@@ -189,7 +178,6 @@ export default function App() {
 
         {/* Sound Types Selection */}
         <div className="sound-types-group">
-          <label className="control-label">Sound Types</label>
           <div className="sound-types-grid">
             <CustomCheckbox
               id="palo"
@@ -227,34 +215,7 @@ export default function App() {
         </div>
 
         {/* Pattern Selection */}
-        <div className="control-group">
-          <label className="control-label">Palo</label>
-          <div className="select-container">
-            <button
-              className="select-button"
-              onClick={() => setIsSelectOpen(!isSelectOpen)}
-            >
-              <span>{selectedPattern.name} ({selectedPattern.beats})</span>
-              <span style={{ fontSize: '0.75rem' }}>▼</span>
-            </button>
-            {isSelectOpen && (
-              <div className="select-dropdown">
-                {flamencoPatterns.map((pattern) => (
-                  <div
-                    key={pattern.name}
-                    className="select-option"
-                    onClick={() => {
-                      setSelectedPattern(pattern);
-                      setIsSelectOpen(false);
-                    }}
-                  >
-                    {pattern.name} ({pattern.beats})
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+          <StyleSelector flamencoPatterns={flamencoPatterns} selectedPatternIndex={selectedPatternIndex} setSelectedPattern={setSelectedPattern} />
 
         {/* BPM Control */}
         <div className="bpm-control">
@@ -311,7 +272,7 @@ export default function App() {
 
         {/* Info */}
         <div className="metronome-info">
-          {selectedPattern.beats} beats • Accents on {selectedPattern.accents.join(', ')}
+          {selectedPattern.beats} beats • Accents on {bitInfo.join(', ')}
         </div>
       </div>
     </div>
