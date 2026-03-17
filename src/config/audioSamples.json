@@ -1,14 +1,14 @@
 {
-  "palo": {
-    "accent": "/sounds/237211__katsam__castanet.wav",
-    "regular": "/sounds/160948_1241666-lq.mp3"
+  "palmas": {
+    "accent": "/sounds/capital-clap-alone_D_minor.wav",
+    "regular": "/sounds/clap-basic_C_minor.wav"
   },
   "jaleo": {
     "accent": "/sounds/clap_03.mp3",
     "regular": "/sounds/human-crowd-studio-16.mp3"
   },
   "castanets": {
-    "accent": "/sounds/capital-clap-alone_D_minor.wav",
+    "accent": "/sounds/237211__katsam__castanet.wav",
     "regular": "/sounds/clap-basic_C_minor.wav"
   },
   "cajon": {

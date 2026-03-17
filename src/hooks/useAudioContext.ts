@@ -7,14 +7,14 @@ interface AudioSample {
 }
 
 interface AudioSamples {
-  palo: AudioSample;
+  palmas: AudioSample;
   jaleo: AudioSample;
   castanets: AudioSample;
   cajon: AudioSample;
 }
 
 interface AudioSamplesConfig {
-  palo: { accent: string; regular: string };
+  palmas: { accent: string; regular: string };
   jaleo: { accent: string; regular: string };
   castanets: { accent: string; regular: string };
   cajon: { accent: string; regular: string };
@@ -54,8 +54,8 @@ export function useAudioContext() {
       const config = audioSamplesConfig as AudioSamplesConfig;
 
       const samples = await Promise.all([
-        loadAudioFile(config.palo.accent),
-        loadAudioFile(config.palo.regular),
+        loadAudioFile(config.palmas.accent),
+        loadAudioFile(config.palmas.regular),
         loadAudioFile(config.jaleo.accent),
         loadAudioFile(config.jaleo.regular),
         loadAudioFile(config.castanets.accent),
@@ -66,7 +66,7 @@ export function useAudioContext() {
 
       if (samples.every(sample => sample !== null)) {
         audioSamplesRef.current = {
-          palo: { accent: samples[0]!, regular: samples[1]! },
+          palmas: { accent: samples[0]!, regular: samples[1]! },
           jaleo: { accent: samples[2]!, regular: samples[3]! },
           castanets: { accent: samples[4]!, regular: samples[5]! },
           cajon: { accent: samples[6]!, regular: samples[7]! },

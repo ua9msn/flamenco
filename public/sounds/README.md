@@ -6,9 +6,9 @@ This directory should contain the WAV audio files for the metronome sounds.
 
 Place the following WAV files in this directory:
 
-### Palo (Traditional Metronome)
-- `palo-accent.wav` - High-pitched click for accented beats
-- `palo-regular.wav` - Mid-pitched click for regular beats
+### palmas (Traditional Metronome)
+- `palmas-accent.wav` - High-pitched click for accented beats
+- `palmas-regular.wav` - Mid-pitched click for regular beats
 
 ### Jaleo (Vocal Shouts)
 - `jaleo-accent.wav` - Vocal "olé" or clap sound for accents

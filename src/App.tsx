@@ -19,7 +19,7 @@ export default function App() {
   const [bpm, setBpm] = useState(120);
   const [selectedPattern, setSelectedPattern] = useState(flamencoPatterns[0]);
   const [soundTypes, setSoundTypes] = useState<SoundTypes>({
-    palo: true,
+    palmas: true,
     jaleo: false,
     castanets: false,
     cajon: false,
@@ -38,7 +38,7 @@ export default function App() {
   const handleScheduleNote = useCallback((beatNumber: number, time: number) => {
     const isAccent = selectedPattern.accents.includes(beatNumber);
     if (useFallbackAudioRef.current) {
-      playFallbackTone(isAccent, 'palo');
+      playFallbackTone(isAccent, 'palmas');
       if (soundTypes.jaleo && isAccent) {
         playFallbackTone(isAccent, 'jaleo');
       }

@@ -21,7 +21,7 @@ export function useAudioPlayback({
     const gainNode = ctx.createGain();
 
     const frequencies: Record<keyof AudioSamples, { accent: number; regular: number }> = {
-      palo: { accent: 1200, regular: 800 },
+      palmas: { accent: 1200, regular: 800 },
       jaleo: { accent: 600, regular: 400 },
       castanets: { accent: 2000, regular: 1500 },
       cajon: { accent: 150, regular: 100 },
@@ -75,7 +75,7 @@ export function useAudioPlayback({
       }
     };
 
-    if (soundTypes.palo) playSample('palo');
+    if (soundTypes.palmas) playSample('palmas');
     if (soundTypes.jaleo) playSample('jaleo');
     if (soundTypes.castanets) playSample('castanets');
     if (soundTypes.cajon) playSample('cajon');

@@ -1,5 +1,5 @@
 export interface SoundTypes {
-  palo: boolean;
+  palmas: boolean;
   jaleo: boolean;
   castanets: boolean;
   cajon: boolean;
@@ -11,7 +11,7 @@ export interface AudioSample {
 }
 
 export interface AudioSamples {
-  palo: AudioSample;
+  palmas: AudioSample;
   jaleo: AudioSample;
   castanets: AudioSample;
   cajon: AudioSample;

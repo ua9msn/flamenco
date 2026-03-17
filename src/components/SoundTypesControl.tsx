@@ -2,7 +2,7 @@ import React from 'react';
 import { CustomCheckbox } from './CustomCheckbox';
 
 interface SoundTypes {
-  palo: boolean;
+  palmas: boolean;
   jaleo: boolean;
   castanets: boolean;
   cajon: boolean;
@@ -22,10 +22,10 @@ export function SoundTypesControl({
       <label className="control-label">Sound Types</label>
       <div className="sound-types-grid">
         <CustomCheckbox
-          id="palo"
-          checked={soundTypes.palo}
-          onChange={(checked) => onSoundTypeChange('palo', checked)}
-          label="Palo"
+          id="palmas"
+          checked={soundTypes.palmas}
+          onChange={(checked) => onSoundTypeChange('palmas', checked)}
+          label="palmas"
         />
         <CustomCheckbox
           id="jaleo"

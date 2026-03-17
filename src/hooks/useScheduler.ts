@@ -21,7 +21,7 @@ export function useScheduler({
   onScheduleNote,
 }: UseSchedulerParams) {
   const nextNoteTimeRef = useRef(0);
-  const [currentBeat, setCurrentBeat] = useState(selectedPattern.beats);
+  const [currentBeatRef, setCurrentBeatRef] = useState(selectedPattern.beats);
   const displayBeatRef = useRef(0);
   const timerIdRef = useRef<number | null>(null);
   const schedulerCallbackRef = useRef<(() => void) | null>(null);
@@ -45,8 +45,8 @@ export function useScheduler({
     // Schedule beats in advance
     while (nextNoteTimeRef.current < ctx.currentTime + scheduleAheadTime) {
       // Increment beat FIRST so currentBeatRef matches the beat being scheduled
-      const bit = (currentBeat % selectedPattern.beats) + 1;
-      setCurrentBeat(bit);
+      const bit = (currentBeatRef % selectedPattern.beats) + 1;
+      setCurrentBeatRef(bit);
       onScheduleNote(bit, nextNoteTimeRef.current);
 
       // Advance time after scheduling
@@ -93,7 +93,7 @@ export function useScheduler({
 
   return {
     nextNoteTimeRef,
-    currentBeatRef: currentBeat,
+    currentBeatRef: currentBeatRef,
     displayBeatRef,
     start,
     stop,

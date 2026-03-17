@@ -22,7 +22,7 @@ export function PatternSelect({
 
   return (
     <div className="control-group">
-      <label className="control-label">Palo</label>
+      <label className="control-label">palmas</label>
       <div className="select-container">
         <button
           className="select-button"
