@@ -8,7 +8,7 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['favicon.svg', 'robots.txt'],
+            includeAssets: ['favicon.ico', 'robots.txt', 'icons/flamenco_192.png', 'icons/flamenco_512.png'],
             manifest: {
                 name: 'Falmenco Metronome',
                 short_name: 'Falmenco',
@@ -20,17 +20,17 @@ export default defineConfig({
                 start_url: '/',
                 icons: [
                     {
-                        src: '/icons/icon-192x192.png',
+                        src: '/icons/flamenco_192.png',
                         sizes: '192x192',
                         type: 'image/png',
                     },
                     {
-                        src: '/icons/icon-512x512.png',
+                        src: '/icons/flamenco_512.png',
                         sizes: '512x512',
                         type: 'image/png',
                     },
                     {
-                        src: '/icons/icon-512x512.png',
+                        src: '/icons/flamenco_512.png',
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'any maskable',
@@ -61,6 +61,8 @@ export default defineConfig({
         outDir: 'dist',
     },
     server: {
+        host: true,
+        https: true,
         port: 3000,
         open: true,
     },
