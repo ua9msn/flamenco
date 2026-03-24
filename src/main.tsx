@@ -1,5 +1,5 @@
 
-  import { createRoot } from "react-dom/client";
+  import React, { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { registerSW } from 'virtual:pwa-register';
@@ -8,10 +8,10 @@ createRoot(document.getElementById("root")!).render(<App />);
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    console.log('New service worker available. Refresh to update.');
+    alert('New service worker available. Refresh to update.');
   },
   onOfflineReady() {
-    console.log('App is ready to work offline.');
+    alert('App is ready to work offline.');
   },
 });
 
@@ -19,7 +19,7 @@ let deferredPrompt: any = null;
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();
   deferredPrompt = event;
-  console.log('beforeinstallprompt fired');
+  alert('beforeinstallprompt fired');
   // Optional: expose it to app UI for custom install button
   window.dispatchEvent(new CustomEvent('pwa-install-available'));
 });

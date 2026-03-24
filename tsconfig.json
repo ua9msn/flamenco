@@ -17,6 +17,9 @@
     "allowJs": true,
     "jsx": "react",
     "baseUrl": "src",
+    "types": [
+     "vite-plugin-pwa/react"
+    ]
   },
   "include": ["./src/**/*", "src/global.d.ts"],
   "exclude": ["node_modules"]
